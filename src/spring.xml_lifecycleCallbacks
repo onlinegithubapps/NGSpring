@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" default-init-method="myInit" default-destroy-method="cleanUp">
+
+    <bean id="parentTriangle" class="com.springDemo.Triangle" abstract="true">
+        <property name="pointA" ref="pointA"/>
+    </bean>
+
+    <bean id="triangle1" class="com.springDemo.Triangle" name="triangle2"
+          autowire="byName"  scope="singleton" parent="parentTriangle">
+       <!-- <property name="points">
+            <list>
+                <ref bean="pointA"/>
+                <ref bean="pointB"/>
+                <ref bean="pointC"/>
+            </list>
+        </property>-->
+        <property name="pointB" ref="pointB"/>
+        <property name="pointC" ref="pointC"/>
+    </bean>
+
+    <bean id="triangle3" class="com.springDemo.Triangle"
+           parent="parentTriangle">
+        <property name="pointB" ref="pointB"/>
+    </bean>
+
+    <bean id="pointA" class="com.springDemo.Point">
+        <property name="x" value="20"/>
+        <property name="y" value="40"/>
+    </bean>
+
+    <bean id="pointB" class="com.springDemo.Point">
+        <property name="x" value="10"/>
+        <property name="y" value="30"/>
+    </bean>
+
+    <bean id="pointC" class="com.springDemo.Point">
+        <property name="x" value="50"/>
+        <property name="y" value="70"/>
+    </bean>
+
+    <!--<alias name="triangle" alias="myangle"/>-->
+
+</beans>
